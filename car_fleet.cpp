@@ -1,37 +1,9 @@
 class Solution
 {
 public:
-    int partition(vector<int> &arr, int low, int high, vector<int> &arr2)
-    {
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j <= high - 1; j++)
-        {
-            if (arr[j] > pivot)
-            {
-                i++;
-                swap(arr[i], arr[j]);
-                swap(arr2[i], arr2[j]);
-            }
-        }
-        swap(arr[i + 1], arr[high]);
-        swap(arr2[i + 1], arr2[high]);
-        return i + 1;
-    }
-
-    void quickSort(vector<int> &arr, int low, int high, vector<int> &arr2)
-    {
-        if (low < high)
-        {
-            int pi = partition(arr, low, high, arr2);
-            quickSort(arr, low, pi - 1, arr2);
-            quickSort(arr, pi + 1, high, arr2);
-        }
-    }
     int carFleet(int target, vector<int> &position, vector<int> &speed)
     {
         int n = position.size();
-        vector<double> time(n);
         vector<pair<int, int>> cars;
         for (int i = 0; i < n; i++)
         {
@@ -52,3 +24,63 @@ public:
         return fleet;
     }
 };
+
+//Alternate soln except last test case (48/49)
+// class Solution
+// {
+// public:
+//     int partition(vector<int> &arr, int low, int high, vector<int> &arr2)
+//     {
+//         int pivot = arr[high];
+//         int i = low - 1;
+//         for (int j = low; j <= high - 1; j++)
+//         {
+//             if (arr[j] > pivot)
+//             {
+//                 i++;
+//                 swap(arr[i], arr[j]);
+//                 swap(arr2[i], arr2[j]);
+//             }
+//         }
+//         swap(arr[i + 1], arr[high]);
+//         swap(arr2[i + 1], arr2[high]);
+//         return i + 1;
+//     }
+
+//     void quickSort(vector<int> &arr, int low, int high, vector<int> &arr2)
+//     {
+//         if (low < high)
+//         {
+//             int pi = partition(arr, low, high, arr2);
+//             quickSort(arr, low, pi - 1, arr2);
+//             quickSort(arr, pi + 1, high, arr2);
+//         }
+//     }
+//     int carFleet(int target, vector<int> &position, vector<int> &speed)
+//     {
+//         int count = position.size();
+//         vector<double> time(count);
+//         quickSort(position, 0, count - 1, speed);
+//         for (int i = 0; i < count; i++)
+//         {
+//             time[i] = (double)(target - position[i]) / speed[i];
+//         }
+//         for (int i = 0; i < count - 1; i++)
+//         {
+//             for (int j = i + 1; j < count; j++)
+//             {
+//                 if (time[j] <= time[i])
+//                 {
+//                     time.erase(time.begin() + j);
+//                     count--;
+//                     j--;
+//                 }
+//             }
+//         }
+//         if (count == 0)
+//         {
+//             count = 1;
+//         }
+//         return count;
+//     }
+// };
