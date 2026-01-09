@@ -25,6 +25,37 @@ public:
     }
 };
 
+//stack method
+class Solution
+{
+public:
+    int carFleet(int target, vector<int> &position, vector<int> &speed)
+    {
+        int n = position.size();
+        vector<pair<int, int>> cars;
+        for (int i = 0; i < n; i++)
+        {
+            cars.push_back({position[i], speed[i]});
+        }
+        sort(cars.begin(), cars.end(), greater<pair<int, int>>());
+
+        stack<double> time;
+
+        for (int i = 0; i < n; i++)
+        {
+            int posn = cars[i].first;
+            int sp = cars[i].second;
+            double t = (double)(target - posn) / sp;
+
+            if (time.empty() || t > time.top())
+            {
+                time.push(t);
+            }
+        }
+        return time.size();
+    }
+};
+
 //Alternate soln except last test case (48/49)
 // class Solution
 // {
